@@ -2,6 +2,8 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/instnckn/kiakia.inst4lcr.org/
+  - /bin/cp -R public/admin_assests $DEPLOYPATH
+ - /bin/cp -R public/ckeditor $DEPLOYPATH
  - /bin/cp -R public/css $DEPLOYPATH
  - /bin/cp -R public/img $DEPLOYPATH
  - /bin/cp -R public/js $DEPLOYPATH
