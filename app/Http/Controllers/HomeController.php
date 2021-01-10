@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = DB::table('posts')
+                            ->orderBy('id', 'desc')
+                            ->paginate(6);
+        return view('home',
+        [
+            'posts' =>  $posts
+        ]);
     }
 }

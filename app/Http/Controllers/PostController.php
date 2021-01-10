@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -12,9 +13,16 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $post = DB::table('posts')->orderBy('created_at', 'desc')->get();
+        return view('admin.post.post', ['post' => $post]);
     }
 
     /**
@@ -24,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.create_post');
     }
 
     /**
@@ -35,16 +43,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'author' => 'required',
+            'title' => 'required',
+            'preview' => 'required',
+            'read_more' => 'required',
+        ]);
+                
+        $post = new Post();
+        $post->author = $request->author;
+        $post->title = $request->title;
+        $post->preview = $request->preview;
+        $post->read_more = $request->read_more;
+        $post->save(); 
+        $request->session()->flash('success', 'Post added successfully');
+        return redirect()->route('admin.post');  
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Post  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show( $activity)
     {
         //
     }
@@ -52,12 +74,13 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Post  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.post.edit_post', compact('post'));
     }
 
     /**
@@ -67,9 +90,27 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'author' => 'required',
+            'title' => 'required',
+            'preview' => 'required',
+            'read_more' => 'required',
+            ]);
+        $data = array(
+            'author' => $request->input('author'),
+            'title' => $request->input('title'),
+            'preview' => $request->input('preview'),
+            'read_more' => $request->input('read_more'),
+        );       
+        Post::where('id', $id)->update($data);
+        return redirect('/admin/post')->with('success', 'Post updated successfully'); 
+
+        $team = Post::find($id);
+        $this->validate($request, [        
+        ]);
     }
 
     /**
@@ -83,3 +124,4 @@ class PostController extends Controller
         //
     }
 }
+

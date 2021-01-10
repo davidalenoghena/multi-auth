@@ -32,5 +32,13 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::post('/register/agent', 'Auth\RegisterController@createAgent');
 
 Route::view('/home', 'home')->middleware('auth');
-Route::get('/admin', 'AdminController@index');
-Route::get('/agent', 'AgentController@index');
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/agent', 'AgentController@index')->name('admin');
+
+//Post section
+Route::get('/admin/post', 'PostController@index')->name('admin.post');
+Route::get('/admin/post/create', 'PostController@create')->name('admin.post.create'); 
+Route::post('admin/post/store', 'PostController@store')->name('store.post');
+Route::get('/admin/post/{id}', 'Post@show')->name('show.post');
+Route::get('admin/post/edit/{id}', 'PostController@edit')->name('edit.post');
+Route::post('admin/post/update/{id}', 'PostController@update')->name('update.post');

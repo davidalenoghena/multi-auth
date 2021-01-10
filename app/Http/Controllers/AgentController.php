@@ -23,6 +23,12 @@ class AgentController extends Controller
      */
     public function index()
     {
-        return view('agent');
+        $posts = DB::table('posts')
+                            ->orderBy('id', 'desc')
+                            ->paginate(6);
+        return view('agent',
+        [
+            'posts' =>  $posts
+        ]);
     }
 }
