@@ -73,7 +73,7 @@
                 <p>
                 {{ $post->preview }}
                 </p>
-                <div class="details" style="display:none">{{ $post->read_more }}</div>
+                <div class="details" style="display:none">{!! $post->read_more !!}</div>
                 <div class="read-more">
                 <a id="more" onclick="$('.details').slideToggle(function(){$('#more').html($('.details').is(':visible')?'See Less Details':'Read More');});">Read More</a>
                 </div>

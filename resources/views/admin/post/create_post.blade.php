@@ -27,10 +27,14 @@
         <div class="form-group">
           <label for="exampleInputName1">Title</label>
           <input type="text" class="form-control" name="title" id="exampleInputName1" placeholder="Title" required>
-        <div class="form-group">
-          <label for="exampleInputName1">Preview</label>
-          <input type="text" class="form-control" name="preview" id="exampleInputName1" placeholder="Preview" required>
-        </div>
+          <div class="form-group">
+            <label for="exampleInputName1">Preview</label>
+            <input type="text" class="form-control" name="preview" id="exampleInputName1" placeholder="Preview" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName1">Username</label>
+            <input type="text" class="form-control" name="author" id="exampleInputName1" placeholder="Username" required>
+          </div>
         </div>
         <div class="form-group">
           <label for="exampleInputName1">Read_More</label>
