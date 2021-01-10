@@ -1,0 +1,12 @@
+---
+deployment:
+ tasks:
+ - export DEPLOYPATH=/home/instnckn/kiakia.inst4lcr.org/
+ - /bin/cp -R public/css $DEPLOYPATH
+ - /bin/cp -R public/img $DEPLOYPATH
+ - /bin/cp -R public/js $DEPLOYPATH
+ - /bin/cp -R public/vendor $DEPLOYPATH
+ - /bin/cp -R public/.htaccess $DEPLOYPATH
+ - /bin/cp -R public/favicon.ico $DEPLOYPATH
+ - /bin/cp -R public/robots.txt $DEPLOYPATH
+ - /bin/cp -R public/web.config $DEPLOYPATH
