@@ -15,26 +15,26 @@
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Add activity</h4>
+      <h4 class="card-title">Add post</h4>
       <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
             @endforeach
         </ul>
 
-      <form action="{{ route('store.activity') }}" method="POST" enctype="multipart/form-data" class="forms-sample" >
+      <form action="{{ route('store.post') }}" method="POST" enctype="multipart/form-data" class="forms-sample" >
         @csrf
         <div class="form-group">
-          <label for="exampleInputName1">Year</label>
-          <input type="text" class="form-control" name="year" id="exampleInputName1" placeholder="Year" required>
+          <label for="exampleInputName1">Title</label>
+          <input type="text" class="form-control" name="title" id="exampleInputName1" placeholder="Title" required>
         <div class="form-group">
-          <label for="exampleInputName1">Month</label>
-          <input type="text" class="form-control" name="month" id="exampleInputName1" placeholder="Month" required>
+          <label for="exampleInputName1">Preview</label>
+          <input type="text" class="form-control" name="preview" id="exampleInputName1" placeholder="Preview" required>
         </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputName1">Activity</label>
-          <textarea name="body" id="editor1" rows="10" cols="80">
+          <label for="exampleInputName1">Read_More</label>
+          <textarea name="read_more" id="editor1" rows="10" cols="80">
             {{ old('body') }}
         </textarea>
         <script>

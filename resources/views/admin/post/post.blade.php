@@ -16,7 +16,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Activities</h4>
+                  <h4 class="card-title">Posts</h4>
                   @if(Session::has('success'))
                   <div class="alert  alert-success alert-dismissible fade show">
                       <span class="badge badge-pill badge-success">Success</span>
@@ -32,13 +32,13 @@
                             #
                           </th>
                           <th>
-                            Year
+                            Title
                           </th>
                           <th>
-                            Month
+                            Preview
                           </th>
                           <th>
-                            Activity
+                            Read More
                           </th>
                           <th>
                             Action
@@ -49,22 +49,22 @@
                         @php
                          $count = 1;
                         @endphp
-                        @foreach($activity as $row)
+                        @foreach($post as $row)
                         <tr>
                           <td>
                             {{ $count++ }}
                           </td>
                           <td>
-                            {{ $row->year }}
+                            {{ $row->title }}
                           </td>
                           <td>
-                            {{ $row->month }}
+                          {{ \Illuminate\Support\Str::limit($row->preview, 5, $end='...') }}
                           </td>
                           <td>
-                            {!! $row->body !!}
+                          {{ \Illuminate\Support\Str::limit($row->read_more, 5, $end='...') }}
                           </td>
                           <td>
-                            <a href="{{ route('edit.activity', ['id' => $row->id]) }}"> Edit </a>
+                            <a href="{{ route('edit.post', ['id' => $row->id]) }}"> Edit </a>
                           </td>
                         </tr>
                          @endforeach
