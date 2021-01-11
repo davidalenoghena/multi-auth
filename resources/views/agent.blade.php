@@ -56,6 +56,38 @@
         <div class="row">
 
           <div class="col-lg-12 entries">
+          <form >
+            <script src="https://js.paystack.co/v1/inline.js"></script>
+            <button type="button" onclick="payWithPaystack()"> Pay </button> 
+          </form>
+                
+          <script>
+            function payWithPaystack(){
+              var handler = PaystackPop.setup({
+                key: 'pk_test_774b88fe5735cb10af1c710265a14e51f99124c5',
+                email: 'davidalenoghena@gmail.com',
+                amount: 10000,
+                currency: "NGN",
+                ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                metadata: {
+                  custom_fields: [
+                      {
+                          display_name: "Mobile Number",
+                          variable_name: "mobile_number",
+                          value: "+2348012345678"
+                      }
+                  ]
+                },
+                callback: function(response){
+                    alert('success. transaction ref is ' + response.reference);
+                },
+                onClose: function(){
+                    alert('window closed');
+                }
+              });
+              handler.openIframe();
+            }
+          </script>
             @foreach($posts as $post)
             <article class="entry">
               <h2 class="entry-title">
@@ -64,7 +96,7 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="">{{ $post->title }}</a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="">{{ $post->author }}</a></li>
                   <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href=""><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
                 </ul>
               </div>
@@ -73,7 +105,9 @@
                 <p>
                 {{ $post->preview }}
                 </p>
+                <p>
                 <div class="details" style="display:none">{!! $post->read_more !!}</div>
+                </p>
                 <div class="read-more">
                 <a id="more" onclick="$('.details').slideToggle(function(){$('#more').html($('.details').is(':visible')?'See Less Details':'Read More');});">Read More</a>
                 </div>

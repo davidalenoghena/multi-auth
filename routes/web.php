@@ -20,20 +20,21 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-Route::get('/login/agent', 'Auth\LoginController@showAgentLoginForm');
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
-Route::get('/register/agent', 'Auth\RegisterController@showAgentRegisterForm');
+Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('admin_login');
+Route::get('/login/agent', 'Auth\LoginController@showAgentLoginForm')->name('agent_login');
+Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm')->name('admin_reg');
+Route::get('/register/agent', 'Auth\RegisterController@showAgentRegisterForm')->name('agent_reg');
 Route::get('/research', 'HomeController@index')->name('home');
+// Route::post('admin/user/update/{id}', 'HomeController@update')->name('update.payed');
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::post('/login/agent', 'Auth\LoginController@agentLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::post('/register/agent', 'Auth\RegisterController@createAgent');
 
-Route::view('/home', 'home')->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/agent', 'AgentController@index')->name('admin');
+Route::get('/agent', 'AgentController@index')->name('agent');
 
 //Post section
 Route::get('/admin/post', 'PostController@index')->name('admin.post');

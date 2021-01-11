@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,12 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $posts = DB::table('posts')
                             ->orderBy('id', 'desc')
                             ->paginate(6);
         return view('home',
         [
-            'posts' =>  $posts
+            'posts' =>  $posts,
+            'user' =>  $user
         ]);
     }
 }
